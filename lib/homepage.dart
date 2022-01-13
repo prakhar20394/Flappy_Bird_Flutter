@@ -14,16 +14,16 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
-  double birdYaxis = 0;
-  double time = 0;
-  double height = 0;
-  double initialHeight = 0;
+  double birdYaxis = 0.0;
+  double time = 0.0;
+  double height = 0.0;
+  double initialHeight = 0.0;
   bool startGame = false;
   static double barrierXaxis1 = 0.6;
-  static double barrierXaxis2 = barrierXaxis1 + 1;
-  static double barrierXaxis3 = barrierXaxis2 + 1;
-  static double barrierXaxis4 = barrierXaxis3 + 1;
-  static double barrierXaxis5 = barrierXaxis4 + 1;
+  static double barrierXaxis2 = barrierXaxis1 + 1.0;
+  static double barrierXaxis3 = barrierXaxis2 + 1.0;
+  static double barrierXaxis4 = barrierXaxis3 + 1.0;
+  static double barrierXaxis5 = barrierXaxis4 + 1.0;
   double speed = 0.02;
 
   @override
@@ -59,11 +59,11 @@ class _HomePageState extends State<HomePage>
                         color: Colors.lightBlueAccent,
                         // ignore: prefer_const_constructors
                         duration: Duration(milliseconds: 0),
-                        alignment: Alignment(0, birdYaxis),
-                        child: MyBird(),
+                        alignment: Alignment(0.0, birdYaxis),
+                        child: const MyBird(),
                       ),
                       Container(
-                        alignment: const Alignment(0, -0.3),
+                        alignment: const Alignment(0.0, -0.3),
                         child: startGame
                             ? const Text('')
                             : const Text(
@@ -76,92 +76,92 @@ class _HomePageState extends State<HomePage>
                       ),
                       AnimatedContainer(
                         alignment: Alignment(barrierXaxis1, 1.1),
-                        duration: Duration(
+                        duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: Barrier(
-                          size: 150,
+                        child: const Barrier(
+                          size: 150.0,
                         ),
                       ),
                       AnimatedContainer(
                         alignment: Alignment(barrierXaxis1, -1.1),
-                        duration: Duration(
+                        duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: Barrier(
-                          size: 200,
+                        child: const Barrier(
+                          size: 200.0,
                         ),
                       ),
                       AnimatedContainer(
                         alignment: Alignment(barrierXaxis2, 1.1),
-                        duration: Duration(
+                        duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: Barrier(
-                          size: 20,
+                        child: const Barrier(
+                          size: 20.0,
                         ),
                       ),
                       AnimatedContainer(
                         alignment: Alignment(barrierXaxis2, -1.1),
-                        duration: Duration(
+                        duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: Barrier(
-                          size: 300,
+                        child: const Barrier(
+                          size: 300.0,
                         ),
                       ),
                       AnimatedContainer(
                         alignment: Alignment(barrierXaxis3, 1.1),
-                        duration: Duration(
+                        duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: Barrier(
-                          size: 200,
+                        child: const Barrier(
+                          size: 200.0,
                         ),
                       ),
                       AnimatedContainer(
                         alignment: Alignment(barrierXaxis3, -1.1),
-                        duration: Duration(
+                        duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: Barrier(
-                          size: 200,
+                        child: const Barrier(
+                          size: 200.0,
                         ),
                       ),
                       AnimatedContainer(
                         alignment: Alignment(barrierXaxis4, 1.1),
-                        duration: Duration(
+                        duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: Barrier(
-                          size: 110,
+                        child: const Barrier(
+                          size: 110.0,
                         ),
                       ),
                       AnimatedContainer(
                         alignment: Alignment(barrierXaxis4, -1.1),
-                        duration: Duration(
+                        duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: Barrier(
-                          size: 30,
+                        child: const Barrier(
+                          size: 30.0,
                         ),
                       ),
                       AnimatedContainer(
                         alignment: Alignment(barrierXaxis5, 1.1),
-                        duration: Duration(
+                        duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: Barrier(
-                          size: 250,
+                        child: const Barrier(
+                          size: 250.0,
                         ),
                       ),
                       AnimatedContainer(
                         alignment: Alignment(barrierXaxis5, -1.1),
-                        duration: Duration(
+                        duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: Barrier(
-                          size: 150,
+                        child: const Barrier(
+                          size: 150.0,
                         ),
                       ),
                     ],
@@ -181,9 +181,9 @@ class _HomePageState extends State<HomePage>
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
+                              children: const [
                                 Text(
-                                  'Score: ',
+                                  'Score     ',
                                   style: TextStyle(
                                     color: Colors.white70,
                                     fontSize: 20,
@@ -195,15 +195,15 @@ class _HomePageState extends State<HomePage>
                                 Text('0',
                                     style: TextStyle(
                                       color: Colors.white70,
-                                      fontSize: 20,
+                                      fontSize: 40,
                                     )),
                               ],
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
+                              children: const [
                                 Text(
-                                  'Best Score: ',
+                                  'Best Score',
                                   style: TextStyle(
                                     color: Colors.white70,
                                     fontSize: 20,
@@ -216,7 +216,7 @@ class _HomePageState extends State<HomePage>
                                   '10',
                                   style: TextStyle(
                                     color: Colors.white70,
-                                    fontSize: 20,
+                                    fontSize: 40,
                                   ),
                                 ),
                               ],
@@ -277,7 +277,7 @@ class _HomePageState extends State<HomePage>
       if (birdYaxis > 1.1) {
         timer.cancel();
         startGame = false;
-        _showDialog();
+        //_showDialog();
       }
     });
   }
@@ -289,9 +289,7 @@ class _HomePageState extends State<HomePage>
       return false;
     }
   }
-  void _showDialog(){
-    showDialog(context: context, barrierDismissible: false, builder: (BuilderContext context))
-  }
+
   jump() {
     setState(() {
       time = 0;
@@ -299,4 +297,3 @@ class _HomePageState extends State<HomePage>
     });
   }
 }
-

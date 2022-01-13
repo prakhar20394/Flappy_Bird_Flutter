@@ -7,12 +7,12 @@ class Barrier extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
+      width: 100.0,
       height: size,
       decoration: BoxDecoration(
         color: Colors.green,
         border: Border.all(width: 6, color: Colors.lightGreen),
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(15.0),
       ),
     );
   }
