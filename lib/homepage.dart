@@ -25,6 +25,51 @@ class _HomePageState extends State<HomePage>
   static double barrierXaxis4 = barrierXaxis3 + 1.0;
   static double barrierXaxis5 = barrierXaxis4 + 1.0;
   double speed = 0.02;
+  int score = 0;
+  int highScore = 0;
+
+  void resetGame() {
+    Navigator.pop(context);
+    //print('Test');
+    setState(() {
+      birdYaxis = 0;
+      startGame = false;
+      time = 0;
+      speed = 0.02;
+      initialHeight = birdYaxis;
+    });
+  }
+
+  void _showDialog() {
+    //print('Test2');
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.brown,
+            title: const Center(
+                child: Text('GAME OVER',
+                    style: TextStyle(
+                      color: Colors.white70,
+                    ))),
+            actions: [
+              GestureDetector(
+                  onTap: resetGame,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Container(
+                        padding: const EdgeInsets.all(7),
+                        color: Colors.white70,
+                        child: const Text(
+                          'PLAY AGAIN',
+                          style: TextStyle(color: Colors.brown),
+                        )),
+                  ))
+            ],
+          );
+        });
+  }
 
   @override
   void initState() {
@@ -98,7 +143,7 @@ class _HomePageState extends State<HomePage>
                           milliseconds: 0,
                         ),
                         child: const Barrier(
-                          size: 20.0,
+                          size: 100.0,
                         ),
                       ),
                       AnimatedContainer(
@@ -143,7 +188,7 @@ class _HomePageState extends State<HomePage>
                           milliseconds: 0,
                         ),
                         child: const Barrier(
-                          size: 30.0,
+                          size: 190.0,
                         ),
                       ),
                       AnimatedContainer(
@@ -181,19 +226,19 @@ class _HomePageState extends State<HomePage>
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
-                                Text(
+                              children: [
+                                const Text(
                                   'Score     ',
                                   style: TextStyle(
                                     color: Colors.white70,
                                     fontSize: 20,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
-                                Text('0',
-                                    style: TextStyle(
+                                Text(score.toString(),
+                                    style: const TextStyle(
                                       color: Colors.white70,
                                       fontSize: 40,
                                     )),
@@ -201,20 +246,20 @@ class _HomePageState extends State<HomePage>
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
-                                Text(
-                                  'Best Score',
+                              children: [
+                                const Text(
+                                  'Top Score',
                                   style: TextStyle(
                                     color: Colors.white70,
                                     fontSize: 20,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
                                 Text(
-                                  '10',
-                                  style: TextStyle(
+                                  highScore.toString(),
+                                  style: const TextStyle(
                                     color: Colors.white70,
                                     fontSize: 40,
                                   ),
@@ -229,9 +274,13 @@ class _HomePageState extends State<HomePage>
 
   void startJumpGame() {
     startGame = true;
+    birdIsDead = false;
+    score = 0;
+    int counter = 0;
     Timer.periodic(const Duration(milliseconds: 100), (timer) {
       time += 0.05;
       height = ((-8.9) * time * time + (3 * time));
+      counter += 1;
       setState(() {
         barrierXaxis1 -= speed;
         barrierXaxis2 -= speed;
@@ -239,6 +288,10 @@ class _HomePageState extends State<HomePage>
         barrierXaxis4 -= speed;
         barrierXaxis5 -= speed;
         birdYaxis = initialHeight - height;
+        if (counter % 100 == 0) {
+          score += 1;
+          //print("Score +1");
+        }
       });
       if (barrierXaxis1 < -1.2) {
         setState(() {
@@ -274,21 +327,21 @@ class _HomePageState extends State<HomePage>
         });
       });
       //print(birdYaxis);
-      if (birdYaxis > 1.1) {
+
+      if (birdYaxis >= 1.1 || birdYaxis <= -1.1) {
+        _showDialog();
+        if (score > highScore) {
+          setState(() {
+            highScore = score;
+          });
+        }
+        //print('Test 1');
         timer.cancel();
-        startGame = false;
-        //_showDialog();
       }
     });
   }
 
-  bool birdIsDead() {
-    if ((birdYaxis > 1) || (birdYaxis < -1)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  bool birdIsDead = false;
 
   jump() {
     setState(() {
