@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage>
   double height = 0.0;
   double initialHeight = 0.0;
   bool startGame = false;
-  List<double> barrierXaxis = [0.6, 1.6, 2.6, 3.6, 4.6];
+  List<double> barrierXaxis = [0.6, 2.1, 3.6, 5.1, 6.6];
   List<List<double>> barrierHeight = [
     [0.5, 1, 0.6, 0.3, 0.7],
     [0.3, 0.2, 0.4, 1.0, 0.5],
@@ -313,22 +313,28 @@ class _HomePageState extends State<HomePage>
   }
 
   bool birdIsDead() {
-    if (birdYaxis < -1 || birdYaxis > 1) {
+    if (birdYaxis < -1.4 || birdYaxis > 1.4) {
       print("Border Touch");
       return true;
     }
     for (int i = 0; i < barrierXaxis.length; i++) {
+      print(i);
       if (barrierXaxis[i] <= birdWidth) {
+        print('D2');
         if (barrierXaxis[i] + barrierWidth >= -birdWidth) {
-          if (birdYaxis <= -1 + barrierHeight[0][i] ||
-              birdYaxis + birdHeight >= 1 - barrierHeight[1][i]) {
+          print('D3');
+          if (birdYaxis <= -2 + barrierHeight[0][i] ||
+              birdYaxis + birdHeight >= 2 - barrierHeight[1][i]) {
+            print(birdWidth);
+            print(barrierXaxis);
+            print(birdYaxis);
+            print(birdHeight);
+            print(barrierHeight[0][i]);
+            print(barrierHeight[1][i]);
             print(i);
             return true;
           }
         }
-      }
-      {
-        return true;
       }
     }
     return false;
