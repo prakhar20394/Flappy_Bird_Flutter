@@ -1,19 +1,33 @@
 import 'package:flutter/material.dart';
 
 class Barrier extends StatelessWidget {
+  final BarrierWidth;
+  final BarrierHeight;
+  final barrierX;
   final size;
-  const Barrier({this.size});
+  final bool isBottomBarrier;
+
+  Barrier(
+      {Key? key,
+      this.BarrierHeight,
+      this.BarrierWidth,
+      required this.isBottomBarrier,
+      this.barrierX,
+      this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100.0,
-      height: size,
-      decoration: BoxDecoration(
-        color: Colors.green,
-        border: Border.all(width: 6, color: Colors.lightGreen),
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-    );
+        alignment: Alignment((2 * barrierX + BarrierWidth) / (2 - BarrierWidth),
+            isBottomBarrier ? 1 : -1),
+        child: Container(
+            color: Colors.green,
+            width: MediaQuery.of(context).size.width * BarrierWidth / 2,
+            height: MediaQuery.of(context).size.height *
+                3 /
+                4 *
+                BarrierHeight /
+                2));
   }
 }

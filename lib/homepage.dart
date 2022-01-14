@@ -19,24 +19,34 @@ class _HomePageState extends State<HomePage>
   double height = 0.0;
   double initialHeight = 0.0;
   bool startGame = false;
-  static double barrierXaxis1 = 0.6;
-  static double barrierXaxis2 = barrierXaxis1 + 1.0;
-  static double barrierXaxis3 = barrierXaxis2 + 1.0;
-  static double barrierXaxis4 = barrierXaxis3 + 1.0;
-  static double barrierXaxis5 = barrierXaxis4 + 1.0;
+  List<double> barrierXaxis = [0.6, 1.6, 2.6, 3.6, 4.6];
+  List<List<double>> barrierHeight = [
+    [0.5, 1, 0.6, 0.3, 0.7],
+    [0.3, 0.2, 0.4, 1.0, 0.5],
+  ];
+  double barrierWidth = 0.4;
   double speed = 0.02;
   int score = 0;
+  double birdWidth = 0.5;
+  double birdHeight = 0.5;
   int highScore = 0;
 
   void resetGame() {
     Navigator.pop(context);
     //print('Test');
     setState(() {
+      if (score > highScore) {
+        setState(() {
+          highScore = score;
+        });
+      }
+      score = 0;
       birdYaxis = 0;
       startGame = false;
       time = 0;
       speed = 0.02;
       initialHeight = birdYaxis;
+      barrierXaxis = [0.6, 1.6, 2.6, 3.6, 4.6];
     });
   }
 
@@ -120,93 +130,123 @@ class _HomePageState extends State<HomePage>
                               ),
                       ),
                       AnimatedContainer(
-                        alignment: Alignment(barrierXaxis1, 1.1),
+                        alignment: Alignment(barrierXaxis[0], 1.1),
                         duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: const Barrier(
-                          size: 150.0,
+                        child: Barrier(
+                          barrierX: barrierXaxis[0],
+                          BarrierWidth: barrierWidth,
+                          BarrierHeight: barrierHeight[0][0],
+                          isBottomBarrier: true,
                         ),
                       ),
                       AnimatedContainer(
-                        alignment: Alignment(barrierXaxis1, -1.1),
+                        alignment: Alignment(barrierXaxis[0], -1.1),
                         duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: const Barrier(
-                          size: 200.0,
+                        child: Barrier(
+                          barrierX: barrierXaxis[0],
+                          BarrierWidth: barrierWidth,
+                          BarrierHeight: barrierHeight[1][0],
+                          isBottomBarrier: false,
                         ),
                       ),
                       AnimatedContainer(
-                        alignment: Alignment(barrierXaxis2, 1.1),
+                        alignment: Alignment(barrierXaxis[1], 1.1),
                         duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: const Barrier(
-                          size: 100.0,
+                        child: Barrier(
+                          barrierX: barrierXaxis[1],
+                          BarrierWidth: barrierWidth,
+                          BarrierHeight: barrierHeight[0][1],
+                          isBottomBarrier: true,
                         ),
                       ),
                       AnimatedContainer(
-                        alignment: Alignment(barrierXaxis2, -1.1),
+                        alignment: Alignment(barrierXaxis[1], -1.1),
                         duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: const Barrier(
-                          size: 300.0,
+                        child: Barrier(
+                          barrierX: barrierXaxis[1],
+                          BarrierWidth: barrierWidth,
+                          BarrierHeight: barrierHeight[1][1],
+                          isBottomBarrier: false,
                         ),
                       ),
                       AnimatedContainer(
-                        alignment: Alignment(barrierXaxis3, 1.1),
+                        alignment: Alignment(barrierXaxis[2], 1.1),
                         duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: const Barrier(
-                          size: 200.0,
+                        child: Barrier(
+                          barrierX: barrierXaxis[2],
+                          BarrierWidth: barrierWidth,
+                          BarrierHeight: barrierHeight[0][2],
+                          isBottomBarrier: true,
                         ),
                       ),
                       AnimatedContainer(
-                        alignment: Alignment(barrierXaxis3, -1.1),
+                        alignment: Alignment(barrierXaxis[2], -1.1),
                         duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: const Barrier(
-                          size: 200.0,
+                        child: Barrier(
+                          barrierX: barrierXaxis[2],
+                          BarrierWidth: barrierWidth,
+                          BarrierHeight: barrierHeight[1][2],
+                          isBottomBarrier: false,
                         ),
                       ),
                       AnimatedContainer(
-                        alignment: Alignment(barrierXaxis4, 1.1),
+                        alignment: Alignment(barrierXaxis[3], 1.1),
                         duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: const Barrier(
-                          size: 110.0,
+                        child: Barrier(
+                          barrierX: barrierXaxis[3],
+                          BarrierWidth: barrierWidth,
+                          BarrierHeight: barrierHeight[0][3],
+                          isBottomBarrier: true,
                         ),
                       ),
                       AnimatedContainer(
-                        alignment: Alignment(barrierXaxis4, -1.1),
+                        alignment: Alignment(barrierXaxis[3], -1.1),
                         duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: const Barrier(
-                          size: 190.0,
+                        child: Barrier(
+                          barrierX: barrierXaxis[3],
+                          BarrierWidth: barrierWidth,
+                          BarrierHeight: barrierHeight[1][3],
+                          isBottomBarrier: false,
                         ),
                       ),
                       AnimatedContainer(
-                        alignment: Alignment(barrierXaxis5, 1.1),
+                        alignment: Alignment(barrierXaxis[4], 1.1),
                         duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: const Barrier(
-                          size: 250.0,
+                        child: Barrier(
+                          barrierX: barrierXaxis[4],
+                          BarrierWidth: barrierWidth,
+                          BarrierHeight: barrierHeight[0][4],
+                          isBottomBarrier: true,
                         ),
                       ),
                       AnimatedContainer(
-                        alignment: Alignment(barrierXaxis5, -1.1),
+                        alignment: Alignment(barrierXaxis[4], -1.1),
                         duration: const Duration(
                           milliseconds: 0,
                         ),
-                        child: const Barrier(
-                          size: 150.0,
+                        child: Barrier(
+                          barrierX: barrierXaxis[4],
+                          BarrierWidth: barrierWidth,
+                          BarrierHeight: barrierHeight[1][4],
+                          isBottomBarrier: false,
                         ),
                       ),
                     ],
@@ -272,9 +312,30 @@ class _HomePageState extends State<HomePage>
         ));
   }
 
+  bool birdIsDead() {
+    if (birdYaxis < -1 || birdYaxis > 1) {
+      print("Border Touch");
+      return true;
+    }
+    for (int i = 0; i < barrierXaxis.length; i++) {
+      if (barrierXaxis[i] <= birdWidth) {
+        if (barrierXaxis[i] + barrierWidth >= -birdWidth) {
+          if (birdYaxis <= -1 + barrierHeight[0][i] ||
+              birdYaxis + birdHeight >= 1 - barrierHeight[1][i]) {
+            print(i);
+            return true;
+          }
+        }
+      }
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
   void startJumpGame() {
     startGame = true;
-    birdIsDead = false;
     score = 0;
     int counter = 0;
     Timer.periodic(const Duration(milliseconds: 100), (timer) {
@@ -282,40 +343,40 @@ class _HomePageState extends State<HomePage>
       height = ((-8.9) * time * time + (3 * time));
       counter += 1;
       setState(() {
-        barrierXaxis1 -= speed;
-        barrierXaxis2 -= speed;
-        barrierXaxis3 -= speed;
-        barrierXaxis4 -= speed;
-        barrierXaxis5 -= speed;
+        barrierXaxis[0] -= speed;
+        barrierXaxis[1] -= speed;
+        barrierXaxis[2] -= speed;
+        barrierXaxis[3] -= speed;
+        barrierXaxis[4] -= speed;
         birdYaxis = initialHeight - height;
-        if (counter % 100 == 0) {
+        if (counter % 69 == 0) {
           score += 1;
           //print("Score +1");
         }
       });
-      if (barrierXaxis1 < -1.2) {
+      if (barrierXaxis[0] < -1.2) {
         setState(() {
-          barrierXaxis1 += 5;
+          barrierXaxis[0] += 5;
         });
       }
-      if (barrierXaxis2 < -1.2) {
+      if (barrierXaxis[1] < -1.2) {
         setState(() {
-          barrierXaxis2 += 5;
+          barrierXaxis[1] += 5;
         });
       }
-      if (barrierXaxis3 < -1.2) {
+      if (barrierXaxis[2] < -1.2) {
         setState(() {
-          barrierXaxis3 += 5;
+          barrierXaxis[2] += 5;
         });
       }
-      if (barrierXaxis4 < -1.2) {
+      if (barrierXaxis[3] < -1.2) {
         setState(() {
-          barrierXaxis4 += 5;
+          barrierXaxis[3] += 5;
         });
       }
-      if (barrierXaxis5 < -1.2) {
+      if (barrierXaxis[4] < -1.2) {
         setState(() {
-          barrierXaxis5 += 5;
+          barrierXaxis[4] += 5;
         });
       }
       Timer.periodic(
@@ -327,21 +388,13 @@ class _HomePageState extends State<HomePage>
         });
       });
       //print(birdYaxis);
-
-      if (birdYaxis >= 1.1 || birdYaxis <= -1.1) {
+      if (birdIsDead()) {
         _showDialog();
-        if (score > highScore) {
-          setState(() {
-            highScore = score;
-          });
-        }
-        //print('Test 1');
+        print('Test 1');
         timer.cancel();
       }
     });
   }
-
-  bool birdIsDead = false;
 
   jump() {
     setState(() {
